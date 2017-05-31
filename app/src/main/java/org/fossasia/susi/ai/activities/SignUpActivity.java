@@ -140,12 +140,14 @@ public class SignUpActivity extends AppCompatActivity {
         } else{
             PrefManager.putBoolean("is_susi_server_selected", true);
         }
+
         confirmPassword.setError(null);
         signUp.setEnabled(false);
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Signing up...");
         progressDialog.show();
+
         final Call<SignUpResponse> signUpCall = new ClientBuilder().getSusiApi()
                 .signUp(email.getEditText().getText().toString().trim(),
                         password.getEditText().getText().toString());
@@ -156,6 +158,7 @@ public class SignUpActivity extends AppCompatActivity {
                 signUp.setEnabled(true);
             }
         });
+
         signUpCall.enqueue(new Callback<SignUpResponse>() {
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
@@ -174,7 +177,6 @@ public class SignUpActivity extends AppCompatActivity {
                     AlertDialog alert = alertDialog.create();
                     alert.show();
 
-
                     Button ok = alert.getButton(DialogInterface.BUTTON_POSITIVE);
                     ok.setTextColor(getResources().getColor(R.color.md_blue_500));
                     CredentialHelper.clearFields(email, password, confirmPassword);
@@ -188,7 +190,9 @@ public class SignUpActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
+                                finish();
                             }
                         });
 
@@ -197,12 +201,12 @@ public class SignUpActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent(SignUpActivity.this, ForgotPasswordActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         });
 
                         AlertDialog alert = alertDialog.create();
                         alert.show();
-
 
                         Button ok = alert.getButton(DialogInterface.BUTTON_POSITIVE);
                         ok.setTextColor(getResources().getColor(R.color.md_blue_500));
@@ -219,13 +223,10 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                     // After the implementation of "Forgot Password" option we could create a xml layout for the dialog.
                     // Until then we need to add the buttons dynamically.
-
                 }
                 signUp.setEnabled(true);
                 progressDialog.dismiss();
-
             }
-
 
             @Override
             public void onFailure(Call<SignUpResponse> call, Throwable t) {
@@ -262,7 +263,6 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(SignUpActivity.this);
-
         alertDialog.setCancelable(false);
         alertDialog.setMessage(R.string.error_cancelling_signUp_process_text);
         alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

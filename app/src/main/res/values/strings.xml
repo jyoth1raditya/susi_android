@@ -23,7 +23,8 @@
     <string name="nothing_down_matches_your_query">Nothing Down that matches your Query</string>
     <string name="player_error">Error initializing YouTube player: %s</string>
     <string name="send_message">Sending the message</string>
-
+    <string name="dialog_retrieve_messages_text">Do you want to retrieve your old Messages?</string>
+    <string name="dialog_retrieve_messages_title">Retrieve old Messages</string>
 
     <string name="google_search">Searching the query from google</string>
     <string name="set_alarm">Setting the Alarm</string>
@@ -81,7 +82,7 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="sign_up">Sign Up</string>
-    <string name="pass_validation_text">Enter a combination of at least six characters, containing lower- and uppercase letters and numbers</string>
+    <string name="pass_validation_text">Enter a combination of at least six characters</string>
     <string name="log_in">Log in</string>
     <string name="field_cannot_be_empty">This field cannot be empty</string>
     <string name="delete_items">Delete</string>
